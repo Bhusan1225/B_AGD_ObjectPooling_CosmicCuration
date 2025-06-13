@@ -13,12 +13,12 @@ public class BulletPool
 
     private BulletView bulletView;
     private BulletScriptableObject bulletScriptableObject;
-    private List<PooledBullet> pooledBullets = new List<PooledBullet>();
+    private List<PooledBullet> pooledBullets = new List<PooledBullet>(); //************** imp for pooling
 
     public class PooledBullet
     {
         public BulletController Bullet;
-        public bool isUsed;
+        public bool isUsed; //************** imp for pooling
 
 
     }
@@ -28,6 +28,32 @@ public class BulletPool
         this.bulletScriptableObject = _bulletScriptableObject;
 
     }
+
+    public BulletController GetBullet()
+    {
+       if( pooledBullets.Count > 0)
+        {
+            PooledBullet pooledBullet = pooledBullets.Find(item => !item.isUsed);
+            
+            if (pooledBullet.Bullet != null)
+            {
+                pooledBullet.isUsed = true; //************** imp for pooling
+                return pooledBullet.Bullet;
+            }
+
+
+        }
+       return CreateNewPooledBullet();
+    }
+
+    private BulletController CreateNewPooledBullet()
+    {
+        PooledBullet newPooledBullet = new PooledBullet();
+        newPooledBullet.Bullet = new BulletController(bulletView, bulletScriptableObject);
+        newPooledBullet.isUsed = true; //************** imp for pooling
+        return newPooledBullet.Bullet;
+    }
+
 
 
 }
