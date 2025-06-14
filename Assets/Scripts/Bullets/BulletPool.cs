@@ -40,23 +40,35 @@ public class BulletPool
 
 
     }
+    //public BulletController GetBullet()
+    //{
+    //   if( pooledBullets.Count > 0)
+    //    {
+    //        PooledBullet pooledBullet = pooledBullets.Find(item => !item.isUsed);
+            
+    //        if (pooledBullet.Bullet != null)
+    //        {
+    //            pooledBullet.isUsed = true; //************** imp for pooling
+    //            return pooledBullet.Bullet;
+    //        }
+
+
+    //    }
+    //   return CreateNewPooledBullet();
+    //}
     public BulletController GetBullet()
     {
-       if( pooledBullets.Count > 0)
+        if (pooledBullets.Count > 0)
         {
-            PooledBullet pooledBullet = pooledBullets.Find(item => !item.isUsed);
-            
-            if (pooledBullet.Bullet != null)
+            PooledBullet item = pooledBullets.Find(item => !item.isUsed);
+            if (item != null)
             {
-                pooledBullet.isUsed = true; //************** imp for pooling
-                return pooledBullet.Bullet;
+                item.isUsed = true;
+                return item.Bullet;
             }
-
-
         }
-       return CreateNewPooledBullet();
+        return CreateNewPooledBullet();
     }
-
     private BulletController CreateNewPooledBullet()
     {
         PooledBullet newPooledBullet = new PooledBullet();
