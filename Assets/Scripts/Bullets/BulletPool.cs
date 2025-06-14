@@ -29,6 +29,17 @@ public class BulletPool
 
     }
 
+
+
+    public void ReturnBullet(BulletController returnedBullet)
+    {
+
+        PooledBullet pooledBullet = pooledBullets.Find(item => item.Bullet == (returnedBullet));
+        pooledBullet.isUsed = false; //************** imp for pooling
+
+
+
+    }
     public BulletController GetBullet()
     {
        if( pooledBullets.Count > 0)
@@ -51,6 +62,7 @@ public class BulletPool
         PooledBullet newPooledBullet = new PooledBullet();
         newPooledBullet.Bullet = new BulletController(bulletView, bulletScriptableObject);
         newPooledBullet.isUsed = true; //************** imp for pooling
+        pooledBullets.Add(newPooledBullet); 
         return newPooledBullet.Bullet;
     }
 
