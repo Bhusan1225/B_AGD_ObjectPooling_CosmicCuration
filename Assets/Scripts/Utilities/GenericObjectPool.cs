@@ -51,7 +51,7 @@ public class GenericObjectPool<T> where T : class
     }
 
 
-    protected void ReturnItem(T item)
+    public void ReturnItem(T item)
     {
         PooledItem<T> pooledItem = this.pooledItem.Find(i => i.Item.Equals(item));
         pooledItem.isUsed = false;
