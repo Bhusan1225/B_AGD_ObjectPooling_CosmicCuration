@@ -40,22 +40,7 @@ public class BulletPool
 
 
     }
-    //public BulletController GetBullet()
-    //{
-    //   if( pooledBullets.Count > 0)
-    //    {
-    //        PooledBullet pooledBullet = pooledBullets.Find(item => !item.isUsed);
-            
-    //        if (pooledBullet.Bullet != null)
-    //        {
-    //            pooledBullet.isUsed = true; //************** imp for pooling
-    //            return pooledBullet.Bullet;
-    //        }
 
-
-    //    }
-    //   return CreateNewPooledBullet();
-    //}
     public BulletController GetBullet()
     {
         if (pooledBullets.Count > 0)
